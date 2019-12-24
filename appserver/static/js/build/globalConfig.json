@@ -1,0 +1,446 @@
+{
+    "pages": {
+        "configuration": {
+            "tabs": [
+                {
+                    "name": "account", 
+                    "entity": [
+                        {
+                            "type": "text", 
+                            "label": "Account name", 
+                            "validators": [
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Length of Account name should be between 1 and 50", 
+                                    "minLength": 1, 
+                                    "maxLength": 50
+                                }, 
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Account name must start with a letter and followed by alphabetic letters, digits or underscores.", 
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                }
+                            ], 
+                            "field": "name", 
+                            "help": "Enter a unique name for this account.", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "text", 
+                            "label": "Username", 
+                            "validators": [
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Length of username should be between 1 and 200", 
+                                    "minLength": 1, 
+                                    "maxLength": 200
+                                }
+                            ], 
+                            "options": {
+                                "placeholder": "Enter the username here"
+                            }, 
+                            "help": "Enter the username for this account.", 
+                            "field": "username", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "text", 
+                            "label": "Password", 
+                            "validators": [
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Length of password should be between 1 and 8192", 
+                                    "minLength": 1, 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "encrypted": true, 
+                            "help": "Enter the password for this account.", 
+                            "field": "password", 
+                            "required": true
+                        }
+                    ], 
+                    "table": {
+                        "actions": [
+                            "edit", 
+                            "delete", 
+                            "clone"
+                        ], 
+                        "header": [
+                            {
+                                "label": "Account name", 
+                                "field": "name"
+                            }, 
+                            {
+                                "label": "Username", 
+                                "field": "username"
+                            }
+                        ]
+                    }, 
+                    "title": "Account"
+                }, 
+                {
+                    "name": "logging", 
+                    "entity": [
+                        {
+                            "type": "singleSelect", 
+                            "label": "Log level", 
+                            "options": {
+                                "disableSearch": true, 
+                                "autoCompleteFields": [
+                                    {
+                                        "value": "DEBUG", 
+                                        "label": "DEBUG"
+                                    }, 
+                                    {
+                                        "value": "INFO", 
+                                        "label": "INFO"
+                                    }, 
+                                    {
+                                        "value": "WARNING", 
+                                        "label": "WARNING"
+                                    }, 
+                                    {
+                                        "value": "ERROR", 
+                                        "label": "ERROR"
+                                    }, 
+                                    {
+                                        "value": "CRITICAL", 
+                                        "label": "CRITICAL"
+                                    }
+                                ]
+                            }, 
+                            "defaultValue": "INFO", 
+                            "field": "loglevel"
+                        }
+                    ], 
+                    "title": "Logging"
+                }
+            ], 
+            "title": "Configuration", 
+            "description": "Set up your add-on"
+        }, 
+        "inputs": {
+            "services": [
+                {
+                    "name": "zscaler_audit_logs", 
+                    "entity": [
+                        {
+                            "type": "text", 
+                            "label": "Name", 
+                            "validators": [
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores.", 
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                }, 
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Length of input name should be between 1 and 100", 
+                                    "minLength": 1, 
+                                    "maxLength": 100
+                                }
+                            ], 
+                            "field": "name", 
+                            "help": "Enter a unique name for the data input", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "text", 
+                            "label": "Interval", 
+                            "validators": [
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Interval must be an integer.", 
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$"
+                                }
+                            ], 
+                            "field": "interval", 
+                            "help": "Time interval of input in seconds.", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "singleSelect", 
+                            "label": "Index", 
+                            "validators": [
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Length of index name should be between 1 and 80.", 
+                                    "minLength": 1, 
+                                    "maxLength": 80
+                                }
+                            ], 
+                            "defaultValue": "default", 
+                            "options": {
+                                "endpointUrl": "data/indexes", 
+                                "blackList": "^_.*$", 
+                                "createSearchChoice": true
+                            }, 
+                            "field": "index", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "singleSelect", 
+                            "label": "Select Zscaler Cloud", 
+                            "options": {
+                                "disableSearch": true, 
+                                "autoCompleteFields": [
+                                    {
+                                        "value": "zscaler", 
+                                        "label": "zscaler.net"
+                                    }, 
+                                    {
+                                        "value": "zscalerone", 
+                                        "label": "zscalerone.net"
+                                    }, 
+                                    {
+                                        "value": "zscalertwo", 
+                                        "label": "zscalertwo.net"
+                                    }, 
+                                    {
+                                        "value": "zscalerthree", 
+                                        "label": "zscalerthree.net"
+                                    }, 
+                                    {
+                                        "value": "zscloud", 
+                                        "label": "zscloud.net"
+                                    }, 
+                                    {
+                                        "value": "zscalerbeta", 
+                                        "label": "zscalerbeta.net"
+                                    }, 
+                                    {
+                                        "value": "zscalergov", 
+                                        "label": "zscalergov.net"
+                                    }
+                                ]
+                            }, 
+                            "help": "Select the Zscaler cloud your tenant resides on", 
+                            "field": "cloud", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "text", 
+                            "label": "API Key", 
+                            "validators": [
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Max length of password is 8192", 
+                                    "minLength": 0, 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "encrypted": true, 
+                            "help": "Enter Zscaler API Key", 
+                            "field": "apikey", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "singleSelect", 
+                            "label": "Global Account", 
+                            "options": {
+                                "referenceName": "account"
+                            }, 
+                            "help": "Select configured Zscaler AIP account", 
+                            "field": "global_account", 
+                            "required": true
+                        }
+                    ], 
+                    "title": "Zscaler Audit Logs"
+                }, 
+                {
+                    "name": "zscaler_sandbox_events", 
+                    "entity": [
+                        {
+                            "type": "text", 
+                            "label": "Name", 
+                            "validators": [
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores.", 
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                }, 
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Length of input name should be between 1 and 100", 
+                                    "minLength": 1, 
+                                    "maxLength": 100
+                                }
+                            ], 
+                            "field": "name", 
+                            "help": "Enter a unique name for the data input", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "text", 
+                            "label": "Interval", 
+                            "validators": [
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Interval must be an integer.", 
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$"
+                                }
+                            ], 
+                            "field": "interval", 
+                            "help": "Time interval of input in seconds.", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "singleSelect", 
+                            "label": "Index", 
+                            "validators": [
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Length of index name should be between 1 and 80.", 
+                                    "minLength": 1, 
+                                    "maxLength": 80
+                                }
+                            ], 
+                            "defaultValue": "default", 
+                            "options": {
+                                "endpointUrl": "data/indexes", 
+                                "blackList": "^_.*$", 
+                                "createSearchChoice": true
+                            }, 
+                            "field": "index", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "singleSelect", 
+                            "label": "Select Zscaler Cloud", 
+                            "defaultValue": "zscaler", 
+                            "field": "cloud", 
+                            "help": "Select the Zscaler cloud your tenant resides on", 
+                            "options": {
+                                "disableSearch": true, 
+                                "autoCompleteFields": [
+                                    {
+                                        "value": "zscaler", 
+                                        "label": "zscaler.net"
+                                    }, 
+                                    {
+                                        "value": "zscalerone", 
+                                        "label": "zscalerone.net"
+                                    }, 
+                                    {
+                                        "value": "zscalertwo", 
+                                        "label": "zscalertwo.net"
+                                    }, 
+                                    {
+                                        "value": "zscalerthree", 
+                                        "label": "zscalerthree.net"
+                                    }, 
+                                    {
+                                        "value": "zscloud", 
+                                        "label": "zscloud.net"
+                                    }, 
+                                    {
+                                        "value": "zscalerbeta", 
+                                        "label": "zscalerbeta.net"
+                                    }, 
+                                    {
+                                        "value": "zscalergov", 
+                                        "label": "zscalergov.net"
+                                    }
+                                ]
+                            }, 
+                            "required": true
+                        }, 
+                        {
+                            "type": "text", 
+                            "label": "API Key", 
+                            "validators": [
+                                {
+                                    "type": "string", 
+                                    "errorMsg": "Max length of password is 8192", 
+                                    "minLength": 0, 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "encrypted": true, 
+                            "help": "Enter Zscaler API Key", 
+                            "field": "apikey", 
+                            "required": true
+                        }, 
+                        {
+                            "type": "singleSelect", 
+                            "label": "Global Account", 
+                            "options": {
+                                "referenceName": "account"
+                            }, 
+                            "help": "", 
+                            "field": "global_account", 
+                            "required": true
+                        }
+                    ], 
+                    "title": "Zscaler Sandbox Events"
+                }
+            ], 
+            "title": "Inputs", 
+            "description": "Manage your data inputs", 
+            "table": {
+                "actions": [
+                    "edit", 
+                    "enable", 
+                    "delete", 
+                    "clone"
+                ], 
+                "header": [
+                    {
+                        "label": "Name", 
+                        "field": "name"
+                    }, 
+                    {
+                        "label": "Interval", 
+                        "field": "interval"
+                    }, 
+                    {
+                        "label": "Index", 
+                        "field": "index"
+                    }, 
+                    {
+                        "label": "Status", 
+                        "field": "disabled"
+                    }
+                ], 
+                "moreInfo": [
+                    {
+                        "label": "Name", 
+                        "field": "name"
+                    }, 
+                    {
+                        "label": "Interval", 
+                        "field": "interval"
+                    }, 
+                    {
+                        "label": "Index", 
+                        "field": "index"
+                    }, 
+                    {
+                        "label": "Status", 
+                        "field": "disabled"
+                    }, 
+                    {
+                        "label": "Select Zscaler Cloud", 
+                        "field": "cloud"
+                    }, 
+                    {
+                        "label": "API Key", 
+                        "field": "apikey"
+                    }, 
+                    {
+                        "label": "Global Account", 
+                        "field": "global_account"
+                    }
+                ]
+            }
+        }
+    }, 
+    "meta": {
+        "name": "TA-Zscaler_CIM", 
+        "restRoot": "TA_Zscaler_CIM", 
+        "apiVersion": "3.0.0", 
+        "version": "2.1.0", 
+        "displayName": "Splunk Add-on for Zscaler"
+    }
+}
